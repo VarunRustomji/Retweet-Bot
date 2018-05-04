@@ -69,6 +69,6 @@ def runTime(follow):
         print('\n')
         sleep(60 * 5)  # Sleep for 5 seconds
 
-following = ['VRustomji','theyashbhardwaj']
+following = ['VitalikButerin','SatoshiLite','coindesk','rogerkver','brian_armstrong']
 individuals = classCreation(following)
 runTime(individuals)
