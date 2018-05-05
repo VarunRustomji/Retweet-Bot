@@ -14,6 +14,7 @@ api = tweepy.API(auth)
 class Individual:
     def __init__(self, name):
         mostrecenttweet = api.user_timeline(name)[0]
+        self.data = mostrecenttweet
         self.mostrecenttweet = mostrecenttweet.text
         self.id = mostrecenttweet.id
         self.name = name
@@ -36,6 +37,17 @@ def classCreation(list):
 
     return people
 
+#analyze if the tweet is a retweet or a reply to a tweet
+def scan_tweet(tweet):
+    if (tweet.in_reply_to_status_id is None):
+        try:
+            if(tweet.retweeted_status):
+                return False
+        except AttributeError:
+            return True
+
+    return False
+
 def runTime(follow):
 
     while True:
@@ -48,12 +60,14 @@ def runTime(follow):
 
 
                 if follower.mostrecenttweet != follower.lasttweet:
-                    api.retweet(follower.id)
-                    line = "Something"
-                    print(line)
+                    if scan_tweet(follower.data):
+                        api.retweet(follower.id)
+                    else:
+                        print('Its a retweet or a reply')
 
-                # updates lasttweet to the most recent tweet
-                follower.modify_last(follower.mostrecenttweet)
+                    # updates lasttweet to the most recent tweet
+                    follower.modify_last(follower.mostrecenttweet)
+
 
                 #fetching the most recent tweet again
                 update = api.user_timeline(follower.name)[0]
