@@ -55,8 +55,8 @@ def runTime(follow):
 
             for follower in follow:
 
-                print('Last Tweet: '+ follower.lasttweet)
-                print('Most Recent Tweet: '+follower.mostrecenttweet)
+                # print('Last Tweet: '+ follower.lasttweet)
+                # print('Most Recent Tweet: '+follower.mostrecenttweet)
 
                 if follower.mostrecenttweet != follower.lasttweet:
                     if scan_tweet(follower.data):
