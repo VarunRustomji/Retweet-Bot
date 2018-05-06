@@ -58,7 +58,6 @@ def runTime(follow):
                 print('Last Tweet: '+ follower.lasttweet)
                 print('Most Recent Tweet: '+follower.mostrecenttweet)
 
-
                 if follower.mostrecenttweet != follower.lasttweet:
                     if scan_tweet(follower.data):
                         api.retweet(follower.id)
@@ -67,7 +66,6 @@ def runTime(follow):
 
                     # updates lasttweet to the most recent tweet
                     follower.modify_last(follower.mostrecenttweet)
-
 
                 #fetching the most recent tweet again
                 update = api.user_timeline(follower.name)[0]
@@ -78,6 +76,8 @@ def runTime(follow):
         except tweepy.TweepError as e:
             print(e.message)
 
+        except AttributeError:
+            sleep(5)
 
         print("sleeping")
         print('\n')
