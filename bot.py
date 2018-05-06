@@ -61,6 +61,7 @@ def runTime(follow):
                 if follower.mostrecenttweet != follower.lasttweet:
                     if scan_tweet(follower.data):
                         api.retweet(follower.id)
+                        print('Tweeted')
                     else:
                         print('Its a retweet or a reply')
 
@@ -74,7 +75,7 @@ def runTime(follow):
                 sleep(2)
 
         except tweepy.TweepError as e:
-            print(e.message)
+            print(e)
 
         except AttributeError:
             sleep(5)
